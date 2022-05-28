@@ -1,0 +1,2 @@
+class DeliveryDependencyMarker:
+    pass

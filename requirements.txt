@@ -1,0 +1,6 @@
+SQLAlchemy~=1.4.36
+uvicorn~=0.17.6
+fastapi~=0.78.0
+starlette~=0.19.1
+config~=0.5.1
+pydantic~=1.9.1

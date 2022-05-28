@@ -1,0 +1,2 @@
+class CatalogsDependencyMarker:
+    pass

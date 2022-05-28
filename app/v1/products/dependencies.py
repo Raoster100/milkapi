@@ -1,0 +1,2 @@
+class ProductsDependencyMarker:
+    pass
