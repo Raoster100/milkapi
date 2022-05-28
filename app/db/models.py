@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, DateTime, Boolean, ForeignKey, Integer
+from sqlalchemy import Column, String, DateTime, Integer, ForeignKey
 from sqlalchemy.dialects.mssql.base import MSMoney
 
 from sqlalchemy.orm import relationship
@@ -7,7 +7,7 @@ from misc import Base
 
 
 class UsersModel(Base):
-    __tablename__ = "Users"
+    __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String(40))
@@ -23,29 +23,32 @@ class CatalogsModel(Base):
 
 
 class ProductsModel(Base):
-    __tablename__ = "Products"
+    __tablename__ = "products"
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String)
     description = Column(String)
     price = Column(MSMoney)
     available = Column(Integer)
-    catalog_id = relationship('CatalogsModel', ForeignKey='catalogs.id')
+    catalog_id = Column(Integer, ForeignKey('catalogs.id'))
+    catalog = relationship("CatalogsModel", lazy='joined')
 
 
 class SalesModel(Base):
-    __tablename__ = "Sales"
+    __tablename__ = "sales"
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    buyer_id = relationship('UsersModel', ForeignKey='Users.id')
-    product_id = relationship('ProductsModel', ForeignKey='Products.id')
-
+    buyer_id = Column(Integer, ForeignKey('users.id'))
+    product_id = Column(Integer, ForeignKey('products.id'))
+    buyer = relationship("UsersModel", lazy='joined')
+    product = relationship("ProductsModel", lazy='joined')
 
 class DeliveryModel(Base):
-    __tablename__ = "Delivery"
+    __tablename__ = "delivery"
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     street = Column(String)
     house_number = Column(String)
     date = Column(DateTime)
-    sale_id = relationship('SalesModel', ForeignKey='Sales.id')
+    sale_id = Column(Integer, ForeignKey('sales.id'))
+    sale = relationship("SalesModel", lazy='joined')

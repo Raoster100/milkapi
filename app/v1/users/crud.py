@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.db.crud import BaseCRUD
 from app.db.exceptions.decorators import orm_error_handler
 from app.db.models import UsersModel
-
+import psycopg2
 
 class UsersRepository:
     def __init__(self, db_session: AsyncSession):
