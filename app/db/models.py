@@ -43,6 +43,7 @@ class SalesModel(Base):
     buyer = relationship("UsersModel", lazy='joined')
     product = relationship("ProductsModel", lazy='joined')
 
+
 class DeliveryModel(Base):
     __tablename__ = "delivery"
 

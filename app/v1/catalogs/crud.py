@@ -32,7 +32,6 @@ class CatalogsRepository:
                 name=name
             )
 
-
     @orm_error_handler
     async def get_many_catalogs(self) -> List[CatalogsModel]:
         async with self.base.transaction():

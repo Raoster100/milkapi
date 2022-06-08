@@ -6,6 +6,7 @@ from app.db.exceptions.decorators import orm_error_handler
 from app.db.models import UsersModel
 import psycopg2
 
+
 class UsersRepository:
     def __init__(self, db_session: AsyncSession):
         self.db_session = db_session
@@ -37,6 +38,6 @@ class UsersRepository:
             )
 
     @orm_error_handler
-    async def get_many_catalogs(self) -> List[UsersModel]:
+    async def get_many_users(self) -> List[UsersModel]:
         async with self.base.transaction():
             return await self.base.get_many()
