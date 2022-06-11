@@ -19,6 +19,7 @@ from sqlalchemy.sql import Executable
 Model = TypeVar("Model")
 TransactionContext = AsyncContextManager[AsyncSessionTransaction]
 
+
 class BaseCRUD(ABC):
 
     def __init__(

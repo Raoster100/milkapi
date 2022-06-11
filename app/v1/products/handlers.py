@@ -8,12 +8,13 @@ from app.v1.products.crud import ProductsRepository
 products_router = APIRouter()
 
 
-@products_router.post("/products")
+@products_router.post("/products",
+                      response_model=List[ProductCreateSchema])
 async def create_product(
         data: ProductCreateSchema,
-        db: ProductsRepository
+        db: ProductsRepository = Depends(ProductsDependencyMarker)
 ):
-    return await db.create(name=data.name, description=data.description, price=data.price, available=data.available)
+    return await db.create(name=data.name, description=data.description, price=data.price, available=data.available, catalog_id=data.catalog_id)
 
 
 @products_router.get("/products",

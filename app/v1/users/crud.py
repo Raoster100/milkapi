@@ -5,6 +5,7 @@ from app.db.crud import BaseCRUD
 from app.db.exceptions.decorators import orm_error_handler
 from app.db.models import UsersModel
 import psycopg2
+from uuid import UUID
 
 
 class UsersRepository:
@@ -13,10 +14,9 @@ class UsersRepository:
         self.model = UsersModel
         self.base = BaseCRUD(db_session=db_session, model=self.model)
 
-    async def create(self, _id: int, name: str, telegram_id: int, telegram_login: str) -> UsersModel:
+    async def create(self, name: str, telegram_id: int, telegram_login: str) -> UsersModel:
         async with self.base.transaction():
             return await self.base.insert(
-                id=_id,
                 name=name,
                 telegram_id=telegram_id,
                 telegram_login=telegram_login
@@ -41,3 +41,8 @@ class UsersRepository:
     async def get_many_users(self) -> List[UsersModel]:
         async with self.base.transaction():
             return await self.base.get_many()
+
+    @orm_error_handler
+    async def get_by_id(self, _id: int) -> UsersModel:
+        async with self.base.transaction():
+            return await self.base.get_one(self.model.id == _id)

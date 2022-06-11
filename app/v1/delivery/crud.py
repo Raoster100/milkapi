@@ -13,13 +13,14 @@ class DeliveryRepository:
         self.model = DeliveryModel
         self.base = BaseCRUD(db_session=db_session, model=self.model)
 
-    async def create(self, id: int, street: str, house_number: str, date: datetime) -> DeliveryModel:
+    async def create(self, id: int, street: str, house_number: str, date: datetime, sale_id: int) -> DeliveryModel:
         async with self.base.transaction():
             return await self.base.insert(
                 id=id,
                 street=street,
                 house_number=house_number,
-                date=date
+                date=date,
+                sale_id=sale_id
             )
 
     async def delete(self, _id: int) -> List[DeliveryModel]:

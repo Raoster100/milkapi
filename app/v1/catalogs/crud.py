@@ -12,10 +12,9 @@ class CatalogsRepository:
         self.model = CatalogsModel
         self.base = BaseCRUD(db_session=db_session, model=self.model)
 
-    async def create(self, id: int, name: str) -> CatalogsModel:
+    async def create(self, name: str) -> CatalogsModel:
         async with self.base.transaction():
             return await self.base.insert(
-                id=id,
                 name=name
             )
 

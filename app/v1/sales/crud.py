@@ -12,10 +12,9 @@ class SalesRepository:
         self.model = ProductsModel
         self.base = BaseCRUD(db_session=db_session, model=self.model)
 
-    # async def create(self, id: int, name: str, description: str, price: int, available: int) -> ProductsModel:
+    # async def create(self, name: str, description: str, price: int, available: int) -> ProductsModel:
     #     async with self.base.transaction():
     #         return await self.base.insert(
-    #             id=id,
     #             name=name,
     #             description=description,
     #             price=price,

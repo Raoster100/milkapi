@@ -5,8 +5,9 @@ from app.v1.catalogs.schemas import CatalogGetSchema
 class ProductCreateSchema(BaseModelORM):
     name: str
     description: str
-    price: int
+    price: str
     available: int
+    catalog_id: int
 
 
 class ProductUpdateSchema(BaseModelORM):
@@ -16,6 +17,6 @@ class ProductUpdateSchema(BaseModelORM):
 class ProductGetSchema(BaseModelORM):
     name: str
     description: str
-    price: int
+    price: str
     available: int
     catalog: CatalogGetSchema

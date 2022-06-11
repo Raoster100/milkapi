@@ -58,5 +58,3 @@ def get_application_v1() -> FastAPI:
 
 app = get_application_v1()
 
-if __name__ == "__main__":
-    uvicorn.run(app)
