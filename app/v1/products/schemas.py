@@ -7,7 +7,7 @@ class ProductCreateSchema(BaseModelORM):
     description: str
     price: str
     available: int
-    catalog_id: int
+    catalog_id: CatalogGetSchema
 
 
 class ProductUpdateSchema(BaseModelORM):

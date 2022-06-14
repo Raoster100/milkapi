@@ -12,14 +12,12 @@ class SalesRepository:
         self.model = ProductsModel
         self.base = BaseCRUD(db_session=db_session, model=self.model)
 
-    # async def create(self, name: str, description: str, price: int, available: int) -> ProductsModel:
-    #     async with self.base.transaction():
-    #         return await self.base.insert(
-    #             name=name,
-    #             description=description,
-    #             price=price,
-    #             available=available
-    #         )
+    async def create(self, buyer_id: int, product_id: int) -> ProductsModel:
+        async with self.base.transaction():
+            return await self.base.insert(
+                buyer_id=buyer_id,
+                product_id=product_id
+            )
 
     @orm_error_handler
     async def get_many_sales(self) -> List[ProductsModel]:
