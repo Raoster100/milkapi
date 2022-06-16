@@ -33,3 +33,11 @@ async def update_catalog(
         db: CatalogsRepository = Depends(CatalogsDependencyMarker)
 ):
     return await db.update_catalogs(_id=_id, name=data.name)
+
+
+@catalogs_router.delete("/catalogs/{id}")
+async def delete_catalogs(
+        _id: int = Path(..., alias='id'),
+        db: CatalogsRepository = Depends(CatalogsDependencyMarker)
+):
+    return await db.delete(_id)
