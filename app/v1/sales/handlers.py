@@ -19,7 +19,7 @@ async def get_sales(
 
 
 @sales_router.post("/sales",
-                  response_model=List[PostSalesSchema])
+                   response_model=List[PostSalesSchema])
 async def create_sale(
         data: PostSalesSchema,
         db: SalesRepository = Depends(SalesDependencyMarker)

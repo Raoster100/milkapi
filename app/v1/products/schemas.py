@@ -11,7 +11,10 @@ class ProductCreateSchema(BaseModelORM):
 
 
 class ProductUpdateSchema(BaseModelORM):
+    name: str
+    description: str
     price: int
+    available: int
 
 
 class ProductGetSchema(BaseModelORM):

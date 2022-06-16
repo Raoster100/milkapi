@@ -14,7 +14,8 @@ async def create_product(
         data: ProductCreateSchema,
         db: ProductsRepository = Depends(ProductsDependencyMarker)
 ):
-    return await db.create(name=data.name, description=data.description, price=data.price, available=data.available, catalog_id=data.catalog_id)
+    return await db.create(name=data.name, description=data.description, price=data.price, available=data.available,
+                           catalog_id=data.catalog_id)
 
 
 @products_router.get("/products",
@@ -24,3 +25,15 @@ async def get_products(
         db: ProductsRepository = Depends(ProductsDependencyMarker)
 ):
     return await db.get_many_products()
+
+
+@products_router.patch("/products",
+                       response_model=List[ProductUpdateSchema]
+                       )
+async def patch_products(
+        data: ProductUpdateSchema,
+        _id: int = Path(..., alias='id'),
+        db: ProductsRepository = Depends(ProductsDependencyMarker)
+):
+    return await db.update_products(_id=_id, name=data.name, description=data.description, price=data.price,
+                                    available=data.available)

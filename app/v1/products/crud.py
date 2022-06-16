@@ -28,11 +28,14 @@ class ProductsRepository:
                 self.model.id == _id
             )
 
-    async def update_by_price(self, _id: int, price: int) -> List[ProductsModel]:
+    async def update_products(self, _id: int, price: int, name: str, description: str, available: int) -> List[ProductsModel]:
         async with self.base.transaction():
             return await self.base.update(
                 self.model.id == _id,
-                price=price
+                name=name,
+                description=description,
+                price=price,
+                available=available
             )
 
     async def update_by_description(self, _id: int, description: str) -> List[ProductsModel]:
