@@ -23,3 +23,11 @@ async def get_delivery(
         db: DeliveryRepository = Depends(DeliveryDependencyMarker)
 ):
     return await db.get_many_delivery()
+
+
+@delivery_router.delete("/delivery/{id}")
+async def delete_delivery(
+        _id: int = Path(..., alias='id'),
+        db: DeliveryRepository = Depends(DeliveryDependencyMarker)
+):
+    return await db.delete(_id)
