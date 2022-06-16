@@ -17,7 +17,8 @@ async def create_delivery(
     return await db.create(street=data.street, house_number=data.house_number, date=data.date, sale_id=data.sale_id)
 
 
-@delivery_router.get("/delivery")
+@delivery_router.get("/delivery",
+                     response_model=DeliveryGetSchema)
 async def get_delivery(
         db: DeliveryRepository = Depends(DeliveryDependencyMarker)
 ):
