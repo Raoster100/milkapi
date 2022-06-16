@@ -25,3 +25,10 @@ async def create_sale(
         db: SalesRepository = Depends(SalesDependencyMarker)
 ):
     return await db.create(buyer_id=data.buyer_id, product_id=data.product_id)
+
+@sales_router.delete("/sales/{id}")
+async def delete_catalogs(
+        _id: int = Path(..., alias='id'),
+        db: SalesRepository = Depends(SalesDependencyMarker)
+):
+    return await db.delete(_id)
