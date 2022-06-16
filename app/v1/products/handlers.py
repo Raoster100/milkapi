@@ -37,3 +37,11 @@ async def patch_products(
 ):
     return await db.update_products(_id=_id, name=data.name, description=data.description, price=data.price,
                                     available=data.available)
+
+
+@products_router.delete("/products/{id}")
+async def delete_products(
+        _id: int = Path(..., alias='id'),
+        db: ProductsRepository = Depends(ProductsDependencyMarker)
+):
+    return await db.delete(_id)
