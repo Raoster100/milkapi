@@ -28,3 +28,11 @@ async def get_users_by_id(
         db: UsersRepository = Depends(UsersDependencyMarker)
 ):
     return await db.get_by_id(_id=_id)
+
+
+@users_router.delete("/users/{id}")
+async def delete_catalogs(
+        _id: int = Path(..., alias='id'),
+        db: UsersRepository = Depends(UsersDependencyMarker)
+):
+    return await db.delete(_id)
