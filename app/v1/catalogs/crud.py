@@ -24,7 +24,7 @@ class CatalogsRepository:
                 self.model.id == _id
             )
 
-    async def update(self, _id: int, name: str) -> List[CatalogsModel]:
+    async def update_catalogs(self, _id: int, name: str) -> List[CatalogsModel]:
         async with self.base.transaction():
             return await self.base.update(
                 self.model.id == _id,

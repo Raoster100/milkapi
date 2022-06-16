@@ -8,3 +8,7 @@ class CatalogGetSchema(BaseModelORM):
 
 class CatalogCreateSchema(BaseModelORM):
     name: str
+
+
+class CatalogUpdateSchema(BaseModelORM):
+    name: str
