@@ -1,5 +1,7 @@
-from sqlalchemy import Column, String, DateTime, Integer, ForeignKey
-from sqlalchemy.dialects.mssql.base import MSMoney
+
+
+from sqlalchemy import Column, String, DateTime, Integer, ForeignKey, Numeric
+
 
 from sqlalchemy.orm import relationship
 
@@ -24,11 +26,10 @@ class CatalogsModel(Base):
 
 class ProductsModel(Base):
     __tablename__ = "products"
-    ##TODO: изменить MSMoney
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String)
     description = Column(String)
-    price = Column(MSMoney)
+    price = Column(Numeric)
     available = Column(Integer)
     catalog_id = Column(Integer, ForeignKey('catalogs.id'))
     catalog = relationship("CatalogsModel", lazy='joined')
@@ -36,7 +37,6 @@ class ProductsModel(Base):
 
 class SalesModel(Base):
     __tablename__ = "sales"
-
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     buyer_id = Column(Integer, ForeignKey('users.id'))
     product_id = Column(Integer, ForeignKey('products.id'))
@@ -46,7 +46,6 @@ class SalesModel(Base):
 
 class DeliveryModel(Base):
     __tablename__ = "delivery"
-
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     street = Column(String)
     house_number = Column(String)
