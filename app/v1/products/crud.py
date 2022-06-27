@@ -1,5 +1,4 @@
 from typing import List, Optional
-from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.db.crud import BaseCRUD
 from app.db.exceptions.decorators import orm_error_handler
@@ -12,7 +11,7 @@ class ProductsRepository:
         self.model = ProductsModel
         self.base = BaseCRUD(db_session=db_session, model=self.model)
 
-    async def create(self, name: str, description: str, price: str, available: int, catalog_id: int) -> ProductsModel:
+    async def create(self, name: str, description: str, price: float, available: int, catalog_id: int) -> ProductsModel:
         async with self.base.transaction():
             return await self.base.insert(
                 name=name,
@@ -28,7 +27,7 @@ class ProductsRepository:
                 self.model.id == _id
             )
 
-    async def update_products(self, _id: int, price: int, name: str, description: str, available: int) -> List[ProductsModel]:
+    async def update_products(self, _id: int, price: float, name: str, description: str, available: int) -> List[ProductsModel]:
         async with self.base.transaction():
             return await self.base.update(
                 self.model.id == _id,
