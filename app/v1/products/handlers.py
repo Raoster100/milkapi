@@ -9,7 +9,7 @@ products_router = APIRouter()
 
 
 @products_router.post("/products",
-                      response_model=List[ProductCreateSchema])
+                      response_model=ProductCreateSchema)
 async def create_product(
         data: ProductCreateSchema,
         db: ProductsRepository = Depends(ProductsDependencyMarker)
