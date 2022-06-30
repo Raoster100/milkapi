@@ -17,7 +17,8 @@ async def create_user(
     return await db.create(
         name=data.name,
         telegram_id=data.telegram_id,
-        telegram_login=data.telegram_login
+        telegram_login=data.telegram_login,
+        password=data.password
     )
 
 

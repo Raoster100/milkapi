@@ -14,12 +14,13 @@ class UsersRepository:
         self.model = UsersModel
         self.base = BaseCRUD(db_session=db_session, model=self.model)
 
-    async def create(self, name: str, telegram_id: int, telegram_login: str) -> UsersModel:
+    async def create(self, name: str, telegram_id: int, telegram_login: str, password: str) -> UsersModel:
         async with self.base.transaction():
             return await self.base.insert(
                 name=name,
                 telegram_id=telegram_id,
-                telegram_login=telegram_login
+                telegram_login=telegram_login,
+                password=password
             )
 
     async def delete(self, _id: int) -> List[UsersModel]:
@@ -28,13 +29,14 @@ class UsersRepository:
                 self.model.id == _id
             )
 
-    async def update(self, _id: int, name: str, telegram_id: int, telegram_login: str) -> List[UsersModel]:
+    async def update(self, _id: int, name: str, telegram_id: int, telegram_login: str, password: str) -> List[UsersModel]:
         async with self.base.transaction():
             return await self.base.update(
                 self.model.id == _id,
                 name=name,
                 telegram_id=telegram_id,
-                telegram_login=telegram_login
+                telegram_login=telegram_login,
+                password=password
             )
 
     @orm_error_handler

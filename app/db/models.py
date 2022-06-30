@@ -1,7 +1,4 @@
-
-
 from sqlalchemy import Column, String, DateTime, Integer, ForeignKey, Numeric
-
 
 from sqlalchemy.orm import relationship
 
@@ -15,6 +12,7 @@ class UsersModel(Base):
     name = Column(String(40))
     telegram_id = Column(Integer)
     telegram_login = Column(String)
+    password = Column(String)
 
 
 class CatalogsModel(Base):
